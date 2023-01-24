@@ -3,6 +3,8 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in kitchen-azurerm.gemspec
 gemspec
 
+gem "ffi"
+
 group :test do
   gem "rake", ">= 11.0"
   gem "rspec", "~> 3.5"

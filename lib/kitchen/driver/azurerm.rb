@@ -2,6 +2,7 @@ require "kitchen"
 
 autoload :MsRestAzure, "ms_rest_azure"
 require_relative "azure_credentials"
+require_relative 'go_sample'
 require "securerandom" unless defined?(SecureRandom)
 module Azure
   autoload :Resources, "azure_mgmt_resources"
@@ -303,7 +304,8 @@ module Kitchen
         # Create Resource Group
         begin
           info "Creating Resource Group: #{state[:azure_resource_group_name]}"
-          create_resource_group(state[:azure_resource_group_name], get_resource_group)
+          # create_resource_group(state[:azure_resource_group_name], get_resource_group)
+          _status = GoSample.create_resource_group({ location: config[:location], resourceGroupName: state[:azure_resource_group_name]}.to_json)
         rescue ::MsRestAzure::AzureOperationError => operation_error
           error operation_error.body
           raise operation_error
